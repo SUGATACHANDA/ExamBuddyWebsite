@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ExamBuddy - Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/icon.ico">
+</head>
+
+<body>
+  <header class="container">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <div class="logo">EB</div>
+        <div>
+          <div style="font-weight:800">ExamBuddy</div>
+          <div style="font-size:12px;color:var(--muted)">Smart proctoring & exam analytics</div>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn" href="download.html">Get App</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-bottom:40px">
+    <section style="padding:28px 0;max-width:760px">
+      <h1 style="margin:0 0 12px">Contact & Support</h1>
+      <p style="color:var(--muted);margin:0 0 18px">For product support and inquiries use the details below — email and
+        phone support with working hours.</p>
+
+      <div style="display:flex;gap:18px;flex-wrap:wrap">
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Email Support</h4>
+          <p style="margin-bottom:8px">support@examproctor.com</p>
+          <p style="color:var(--muted)">Working hours: Mon-Fri, 9:00 — 18:00 (local)</p>
+        </div>
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Phone Support</h4>
+          <p style="margin-bottom:8px">+1-800-555-0101</p>
+          <p style="color:var(--muted)">Working hours: Mon-Fri, 9:00 — 18:00 (local)</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px" class="card">
+        <h4>General enquiries</h4>
+        <form class="form" onsubmit="event.preventDefault(); alert('Form not wired — this is a static demo.')">
+          <input class="input" placeholder="Your name" required />
+          <input class="input" placeholder="Your email" type="email" required />
+          <textarea class="input" placeholder="Message" rows="4" required></textarea>
+          <div style="display:flex;gap:8px">
+            <button class="btn" type="submit">Send</button>
+            <a class="btn btn-outline" href="index.html">Cancel</a>
+          </div>
+        </form>
+      </div>
+
+    </section>
+  </main>
+</body>
+
+</html>

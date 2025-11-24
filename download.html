@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ExamBuddy - Download</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/icon.ico">
+</head>
+
+<body>
+  <header class="container">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <div class="logo">EB</div>
+        <div>
+          <div style="font-weight:800">ExamBuddy</div>
+          <div style="font-size:12px;color:var(--muted)">Smart proctoring & exam analytics</div>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn" href="#download">Get App</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-bottom:50px">
+    <section style="padding:28px 0;max-width:820px">
+
+      <h1 style="margin:0 0 10px">Download</h1>
+      <p style="color:var(--muted);margin:0 0 18px">
+        Download the latest official installer of ExamBuddy for Windows. Updates are posted automatically from our
+        GitHub release pipeline.
+      </p>
+
+      <!-- LATEST INSTALLER CARD -->
+      <div class="latest-installer" id="download">
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:16px;">Latest Release</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:4px;">
+            Version: <span id="latest-version">Loading...</span><br>
+            Released: <span id="latest-date">Loading...</span><br>
+            File size: <span id="latest-size">Loading...</span>
+          </div>
+        </div>
+        <div>
+          <a id="btn-download" class="btn" href="#" download disabled style="opacity:0.5;pointer-events:none;">
+            Loading...
+          </a>
+        </div>
+      </div>
+
+      <script>
+        const apiUrl = 'https://api.github.com/repos/SUGATACHANDA/ExamBuddy/releases/latest';
+
+        function formatBytes(bytes) {
+          const units = ['B', 'KB', 'MB', 'GB'];
+          let i = 0;
+          while (bytes >= 1024 && i < units.length - 1) {
+            bytes /= 1024;
+            i++;
+          }
+          return bytes.toFixed(1) + ' ' + units[i];
+        }
+
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            const version = data.tag_name || "Unknown";
+            const published = new Date(data.published_at).toLocaleDateString();
+
+            const asset = data.assets && data.assets.length > 0 ? data.assets[0] : null;
+
+            document.getElementById('latest-version').textContent = version;
+            document.getElementById('latest-date').textContent = published;
+
+            if (asset) {
+              const fileSize = formatBytes(asset.size);
+              const btn = document.getElementById('btn-download');
+
+              btn.href = asset.browser_download_url;
+              btn.textContent = "Download";
+              btn.style.opacity = "1";
+              btn.style.pointerEvents = "auto";
+              document.getElementById('latest-size').textContent = fileSize;
+            } else {
+              document.getElementById('latest-size').textContent = "Not available";
+              document.getElementById('btn-download').textContent = "Unavailable";
+              document.getElementById('btn-download').classList.add('btn-outline');
+            }
+          })
+          .catch(err => {
+            console.error("Error loading GitHub release:", err);
+            document.getElementById('latest-version').textContent = "Error";
+            document.getElementById('latest-date').textContent = "Error";
+            document.getElementById('latest-size').textContent = "Error";
+            document.getElementById('btn-download').textContent = "Retry";
+          });
+      </script>
+
+      <!-- ALTERNATE DOWNLOAD -->
+      <div style="margin-top:14px;font-size:14px;color:var(--muted);">
+        Prefer manual download? View all versions here:
+        <a style="color:var(--primary)" target="_blank" href="https://github.com/SUGATACHANDA/ExamBuddy/releases">
+          GitHub Releases →
+        </a>
+      </div>
+
+
+      <!-- SYSTEM REQUIREMENTS -->
+      <div class="card" style="margin-top:30px;">
+        <h3 style="margin:0 0 12px;font-size:18px;">System Requirements</h3>
+
+        <ul style="padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6;">
+          <li><strong>OS:</strong> Windows 10 or later (64-bit recommended)</li>
+          <li><strong>RAM:</strong> Minimum 4 GB (8 GB recommended)</li>
+          <li><strong>CPU:</strong> Dual-core or higher</li>
+          <li><strong>Camera:</strong> Built-in or external webcam required</li>
+          <li><strong>Storage:</strong> 500 MB free required</li>
+          <li><strong>Internet:</strong> Stable broadband connection required</li>
+        </ul>
+      </div>
+
+
+      <!-- LEGACY LOCAL BACKUP LINK -->
+      <div style="margin-top:28px;color:var(--muted);font-size:13px;">
+        <strong>Backup local copy:</strong>
+        <br>
+        <a style="color:var(--primary)" href="/mnt/data/ExamBuddyWebsite-main.zip" download>
+          Download fallback ZIP
+        </a>
+      </div>
+
+    </section>
+  </main>
+</body>
+
+</html>
